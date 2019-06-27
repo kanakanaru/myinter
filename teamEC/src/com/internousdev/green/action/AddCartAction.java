@@ -47,6 +47,8 @@ public class AddCartAction extends ActionSupport implements SessionAware {
 			try {
 				int tempsumPrice = Math.multiplyExact(Integer.parseInt(productCount), productDTO.getPrice());			    //int型のチェック用の一時的なもの
 
+				cartInfoList = dao.getCartInfoList(userId);
+
 //				現状のカート合計金額＋追加商品の購入金額
 				int intTotalPrice = 0;
 				for(int n=0; n<cartInfoList.size(); n++) {
