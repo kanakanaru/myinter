@@ -1,0 +1,37 @@
+package com.internousdev.ksite.dto;
+
+public class CreateUserDTO {
+
+	private int id;
+	private String namae;
+	private String loginId;
+	private String tell;
+	private String password;
+	private String repassword;
+
+	public int getId(){
+		return id;
+	}
+	public void setId(int id){
+		this.id = id;
+	}
+	public String getNamae(){
+		return namae;
+	}
+	public void setNamae(String namae){
+		this.namae = namae;
+	}
+	public String getLoginId(){
+		return loginId;
+	}
+	public void setLoginId(String loginId){
+		this.loginId = loginId;
+	}
+	public String getTell(){
+		return tell;
+	}
+	public void setTell(String tell){
+		this.tell = tell;
+	}
+
+}

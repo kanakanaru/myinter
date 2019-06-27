@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<runner version="1.0.0">
+<category name="カテゴリーなし">
+<launchConfiguration bookmark="false" name="CartInfoDTOTest"/>
+<launchConfiguration bookmark="false" name="DestinationInfoDTOTest"/>
+<launchConfiguration bookmark="false" name="MCategoryDTOTest"/>
+<launchConfiguration bookmark="false" name="ProductInfoDTOTest"/>
+<launchConfiguration bookmark="false" name="PurchaseHistoryInfoDTOTest"/>
+<launchConfiguration bookmark="false" name="Rensyu1"/>
+<launchConfiguration bookmark="false" name="Rensyu2"/>
+<launchConfiguration bookmark="false" name="UserInfoDTOTest"/>
+<launchConfiguration bookmark="false" name="ecsite2"/>
+<launchConfiguration bookmark="false" name="ksite"/>
+<launchConfiguration bookmark="false" name="ローカル・ホスト での Tomcat8 (Java8) "/>
+</category>
+</runner>

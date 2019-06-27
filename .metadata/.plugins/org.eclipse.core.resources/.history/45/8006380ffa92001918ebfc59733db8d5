@@ -1,0 +1,5 @@
+package com.internousdev.ksite.action;
+
+public class GoUCreateAction {
+
+}
