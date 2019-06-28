@@ -58,6 +58,8 @@ public class AddCartAction extends ActionSupport implements SessionAware {
 			} catch(ArithmeticException e) {
 				return ret;
 			}
+			
+			
 
 			//同じ商品がすでにカート情報テーブルに存在していた場合
 			if(dao.isExistsCartInfo(userId, productId)) {

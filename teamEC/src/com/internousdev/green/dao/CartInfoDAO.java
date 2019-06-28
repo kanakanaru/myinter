@@ -43,6 +43,7 @@ public class CartInfoDAO {
 	public ArrayList<CartInfoDTO> getCartInfoList(String userId) {
 		String sql = "SELECT ci.product_id AS id, ci.product_count, pi.price AS price, pi.product_name, pi.product_name_kana, (ci.product_count * pi.price) AS product_price, pi.image_file_path, pi.image_file_name, pi.release_date, pi.release_company FROM cart_info ci LEFT JOIN product_info pi ON ci.product_id = pi.product_id WHERE ci.user_id = ? ORDER BY ci.update_date DESC, ci.regist_date DESC";
 		Connection con = db.getConnection();
+		ArrayList<CartInfoDTO> cartInfoList = new ArrayList<CartInfoDTO>();
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
