@@ -14,10 +14,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class SettlementConfirmAction extends ActionSupport implements SessionAware{
 
-	public Map<String,Object> session;
-	private ArrayList<DestinationInfoDTO> dtoList = new ArrayList<DestinationInfoDTO>();
-	private DestinationInfoDAO Ddao = new DestinationInfoDAO();
-	private CartInfoDAO Cdao = new CartInfoDAO();
+	public Map<String,Object> session;  /* セッション変数 */
+	private ArrayList<DestinationInfoDTO> dtoList = new ArrayList<DestinationInfoDTO>();  /* 宛先情報のリスト */
+	private DestinationInfoDAO Ddao = new DestinationInfoDAO(); /* DestinationInfoDAOのインスタンス */
+	private CartInfoDAO Cdao = new CartInfoDAO();  /* CartInfoDAOのインスタンス */
 
 	public String execute(){
 
@@ -33,10 +33,13 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 			ArrayList<CartInfoDTO> cartInfoList =Cdao.getCartInfoList(session.get("userId").toString());
 			session.put("cartInfoList", cartInfoList);
 
-			return SUCCESS;
+			return SUCCESS; //宛先情報選択・削除画面に遷移
 		}
 	}
 
+	//以下は、各フィールドのgetterとsetterです。
+
+	//session（セッション変数）
 	public Map<String,Object> getSession(){
 		return this.session;
 	}
@@ -45,6 +48,7 @@ public class SettlementConfirmAction extends ActionSupport implements SessionAwa
 		this.session = session;
 	}
 
+	//dtoList（宛先情報のリスト）
 	public ArrayList<DestinationInfoDTO> getDtoList(){
 		return this.dtoList;
 	}

@@ -12,10 +12,13 @@ import com.internousdev.green.util.DBConnector;
 
 public class MCategoryDAO {
 
+	//DB接続処理
 	private DBConnector db = new DBConnector();
 	private Connection con = db.getConnection();
+
 	private List<MCategoryDTO> dtoList = new ArrayList<MCategoryDTO>();
 
+	//商品カテゴリーの情報を抽出するメソッド
 	public List<MCategoryDTO> getCategoryInfo(){
 
 		String sql = "SELECT * FROM m_category";

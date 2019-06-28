@@ -2,12 +2,15 @@ package com.internousdev.green.dto;
 
 public class MCategoryDTO {
 
-	private int id;
-	private int categoryId;
-	private String categoryName;
-	private String categoryDesc;
+	//カテゴリーマスタテーブルのカラム名に対応したフィールドです。
+	private int id;              /* ID */
+	private int categoryId;      /* カテゴリーID */
+	private String categoryName; /* カテゴリー名 */
+	private String categoryDesc; /* カテゴリー詳細 */
 
-	//idのgetterとsetter
+	//以下、各フィールドのgetterとsetterです。
+
+	//id（ID）
 	public int getId(){
 		return this.id;
 	}
@@ -16,7 +19,7 @@ public class MCategoryDTO {
 		this.id =id;
 	}
 
-	//categoryIdのgetterとsetter
+	//categoryId（カテゴリーID）
 	public int getCategoryId(){
 		return this.categoryId;
 	}
@@ -25,7 +28,7 @@ public class MCategoryDTO {
 		this.categoryId = categoryId;
 	}
 
-	//categoryNameのgetterとsetter
+	//categoryName（カテゴリー名）
 	public String getCategoryName(){
 		return this.categoryName;
 	}
@@ -34,7 +37,7 @@ public class MCategoryDTO {
 		this.categoryName = categoryName;
 	}
 
-	//categoryDescのgetterとsetter
+	//categoryDesc（カテゴリー詳細）
 	public String getCategoryDesc(){
 		return this.categoryDesc;
 	}

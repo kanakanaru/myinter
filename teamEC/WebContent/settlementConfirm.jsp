@@ -77,14 +77,20 @@
 							</tr>
 						</s:iterator>
 					</table>
+
+					<!-- 決済ボタン（決済完了処理） -->
 					<div class="button_pos">
 						<s:submit type="button" value="決済" onclick="SettlementCompleteAction(this.form)" class="button"/>
 					</div>
+
+					<!-- 宛先情報削除ボタン -->
 					<div class="button_pos">
 						<s:submit type="button" value="削除" onclick="DeleteDestinationAction(this.form)" class="button"/>
 					</div>
 				</s:form>
 			</s:else>
+
+			<!-- 新規宛先登録ボタン（宛先情報入力画面へ） -->
 			<div class="button_pos">
 				<s:form action="CreateDestinationAction">
 					<s:submit value="新規宛先登録" class="button"/>

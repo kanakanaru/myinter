@@ -15,11 +15,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class SearchItemAction extends ActionSupport implements SessionAware{
 
-	public Map<String,Object> session;
-	private List<ProductInfoDTO> productInfoDTOList = new ArrayList<ProductInfoDTO>();
-	private List<String> keywordsErrorMessageList;
-	private String keywords;
-	private String categoryId;
+	public Map<String,Object> session;  /* セッション変数 */
+	private List<ProductInfoDTO> productInfoDTOList = new ArrayList<ProductInfoDTO>();  /* 商品情報のリスト（商品一覧用） */
+	private List<String> keywordsErrorMessageList; /* 検索エラーメッセージ */
+	private String keywords;   /* 検索ワード */
+	private String categoryId; /* 商品カテゴリーID */
 
 	public String execute(){
 
@@ -43,7 +43,8 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 			session.put("mCategory", mCategory);
 		}
 
-		//入力チェックを行う。
+		//検索ワードが入力されている場合、入力チェックを行う。
+		//空文字検索の場合、全件検索させるために入力チェックは行わない。
 		if (!keywords.equals("")) {
 			keywordsErrorMessageList = ic.doCheck("検索ワード", keywords, 0, 50, true, true, true, true, false, true, true);
 		}
@@ -51,16 +52,19 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 		keywords = keywords.replaceAll("　+", " ").replaceAll(" +"," ").trim();    //全角スペース部分を半角スペースに置換。
 		String[] keyword = keywords.split("\\s+");                                 //空白文字を区切りとして配列に格納。
 
-		//カテゴリーと検索ワードを用いて商品情報を取得。
+		//カテゴリーIDと検索ワードを用いて商品情報を取得。
 		if(categoryId.equals("1")){                                                //すべてのカテゴリーで検索している場合
 			productInfoDTOList = dao.getProductInfoListByKeyword(keyword);
 		}else{                                                                     //特定のカテゴリーを選んで検索している場合
 			productInfoDTOList = dao.getProductInfoListByCategoryIdAndKeyword(keyword, categoryId);
 		}
 
-		return SUCCESS;
+		return SUCCESS;  //商品一覧画面に遷移
 	}
 
+	//以下、各フィールドのgetterとsetterです。
+
+	//session（セッション変数）
 	public Map<String,Object> getSession(){
 		return this.session;
 	}
@@ -69,6 +73,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 		this.session = session;
 	}
 
+	//productInfoDTOList（商品情報リスト）
 	public List<ProductInfoDTO> getProductInfoDTOList(){
 		return this.productInfoDTOList;
 	}
@@ -77,6 +82,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 		this.productInfoDTOList = productInfoDTOList;
 	}
 
+	//keywordsErrorMessage（検索エラーメッセージ）
 	public List<String> getKeywordsErrorMessageList(){
 		return this.keywordsErrorMessageList;
 	}
@@ -85,6 +91,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 		this.keywordsErrorMessageList = keywordsErrorMessageList;
 	}
 
+	//keywords（検索ワード）
 	public String getKeywords(){
 		return this.keywords;
 	}
@@ -93,6 +100,7 @@ public class SearchItemAction extends ActionSupport implements SessionAware{
 		this.keywords = keywords;
 	}
 
+	//categoryId（商品カテゴリーID）
 	public String getCategoryId(){
 		return this.categoryId;
 	}

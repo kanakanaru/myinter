@@ -14,11 +14,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class SettlementCompleteAction extends ActionSupport implements SessionAware{
 
-	public Map<String,Object> session;
-	private int destinationId;
-	private PurchaseHistoryInfoDAO Pdao = new PurchaseHistoryInfoDAO();
-	private CartInfoDAO Cdao = new CartInfoDAO();
-	DestinationInfoDAO Ddao = new DestinationInfoDAO();
+	public Map<String,Object> session;  /* セッション変数 */
+	private int destinationId;          /* 宛先情報のID */
+	private PurchaseHistoryInfoDAO Pdao = new PurchaseHistoryInfoDAO();  /* PurchaseHistoryDAOのインスタンス */
+	private CartInfoDAO Cdao = new CartInfoDAO();        /* CartInfoDAOのインスタンス */
+	DestinationInfoDAO Ddao = new DestinationInfoDAO();  /* DestinationInfoDAOのインスタンス */
 
 	public String execute(){
 
@@ -36,35 +36,37 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 			}
 		}
 		if(Dresult == 0){
-			return ERROR;
+			return ERROR;  //システムエラー画面に遷移
 		}
 
 		//購入履歴テーブルの登録とカート情報テーブルの削除の処理を一件ずつ行う。
 		ArrayList<CartInfoDTO> cartInfoList = autoCast(session.get("cartInfoList"));
 		for(CartInfoDTO dto : cartInfoList){
 
-			//必要な情報が欠けている場合、エラー画面へ遷移
+			//必要な情報が欠けている場合の処理
 			if(destinationId == 0 || dto.getProductId() == null || dto.getProductCount() == null || dto.getPrice() == null){
-				return ERROR;
+				return ERROR; //システムエラー画面に遷移
 			}
 
 			int Presult = Pdao.regist(session.get("userId").toString(), Integer.parseInt(dto.getProductId()), Integer.parseInt(dto.getProductCount()), destinationId, Integer.parseInt(dto.getPrice()));
 			if(Presult == 0){
-				return ERROR;  //登録失敗の場合
+				return ERROR;  //登録失敗の場合（システムエラー画面に遷移）
 			}else{
 				//登録成功の場合
 				ArrayList<String> productId = new ArrayList<String>();
 				productId.add(dto.getProductId());
 				int Cresult = Cdao.deleteProductCartInfo(session.get("userId").toString(), productId);
 				if(Cresult == 0){
-					return ERROR;  //削除失敗の場合
+					return ERROR;  //削除失敗の場合（システムエラー画面に遷移）
 				}
 			}
 		}
-		return SUCCESS;  //登録・削除が全件成功の場合
-
+		return SUCCESS;  //登録・削除が全件成功の場合（決済完了画面に遷移）
 	}
 
+	//以下は、各フィールドのgetterとsetterです。
+
+	//session（セッション変数）
 	public Map<String,Object> getSession(){
 		return this.session;
 	}
@@ -73,6 +75,7 @@ public class SettlementCompleteAction extends ActionSupport implements SessionAw
 		this.session = session;
 	}
 
+	//destinationId（宛先情報のID）
 	public int getDestinationId(){
 		return this.destinationId;
 	}
